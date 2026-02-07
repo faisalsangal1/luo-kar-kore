@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Something Just for You, Asin ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #2b0033, #000);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Floating hearts & balloons */
+.floating {
+  position: fixed;
+  bottom: -40px;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden { display: none; }
+
+h1 {
+  color: #ff7ac8;
+  font-size: 2.2em;
+  margin-bottom: 10px;
+}
+
+p {
+  max-width: 600px;
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.btn {
+  margin-top: 25px;
+  padding: 14px 30px;
+  font-size: 1em;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff4d9d, #ff9bd2);
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover { transform: scale(1.05); }
+
+.heart {
+  font-size: 70px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9d1d8b0b.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SCREEN 1 -->
+<div class="container" id="screen1">
+  <div class="heart">🐼</div>
+  <h1>Hey Asin…</h1>
+  <p>
+    I rushed something important once…  
+    and I didn’t say it the way you deserved.
+  </p>
+  <button class="btn" onclick="next(2)">Continue 💖</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="container hidden" id="screen2">
+  <h1>I owe you an apology</h1>
+  <p>
+    That first proposal was rushed and dull.  
+    You were right — that wasn’t a real proposal.
+    <br><br>
+    I’m really sorry for that, Asin.
+  </p>
+  <button class="btn" onclick="next(3)">Keep going 💌</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="container hidden" id="screen3">
+  <h1>Here’s the truth</h1>
+  <p>
+    From the first day I talked to you,  
+    life felt a little brighter.
+    <br><br>
+    i genuinely have real feelings for u!
+  </p>
+  <button class="btn" onclick="next(4)">There’s more…</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="container hidden" id="screen4">
+  <h1>Asin ❤️</h1>
+  <p>
+    You’re not just someone I like.  
+    You’re someone I genuinely care about.
+    <br><br>
+    You matter to me.
+  </p>
+  <button class="btn" onclick="next(5)">One last thing…</button>
+</div>
+
+<!-- SCREEN 5 -->
+<div class="container hidden" id="screen5">
+  <div class="heart">💖</div>
+  <h1>This is my real proposal</h1>
+  <p>
+    Not rushed.  
+    Not dull.  
+    Just honest.
+    <br><br>
+    Asin, I really like you.  
+    Would you like to see where this goes?
+  </p>
+
+  <button class="btn" onclick="yes()">Yes 💕</button>
+  <button class="btn" id="noBtn" style="background:#555; position:absolute;">
+    Not yet 🙈
+  </button>
+</div>
+
+<!-- SCREEN 6 (CLEAN CELEBRATION) -->
+<div class="container hidden" id="screen6">
+  <div class="heart">🎉</div>
+  <h1>Okay… this is nice</h1>
+  <p>
+    I’m glad you said yes, Asin.
+    <br><br>
+    Let’s take this one step at a time 🙂
+  </p>
+</div>
+
+<script>
+/* Navigation + music */
+function next(n) {
+  document.getElementById("bgMusic").play();
+  document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+  document.getElementById('screen' + n).classList.remove('hidden');
+}
+
+/* YES */
+function yes() {
+  document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+  document.getElementById('screen6').classList.remove('hidden');
+}
+
+/* Floating hearts & balloons */
+const icons = ["💖","💗","🎈","🎀","❤️"];
+setInterval(() => {
+  const el = document.createElement("div");
+  el.className = "floating";
+  el.innerText = icons[Math.floor(Math.random() * icons.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (20 + Math.random() * 30) + "px";
+  el.style.animationDuration = (6 + Math.random() * 6) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 12000);
+}, 500);
+
+/* NOT YET button runs away */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+</script>
+
+</body>
+</html>
